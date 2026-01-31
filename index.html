@@ -1,0 +1,1131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pharia × Biohackr Health | Brain Reset Day</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Instrument+Sans:wght@400;500;600;700&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --black: #0a0a0a;
+            --white: #ffffff;
+            --off-white: #fafafa;
+            --gray-50: #f5f5f5;
+            --gray-100: #eeeeee;
+            --gray-200: #e0e0e0;
+            --gray-400: #9e9e9e;
+            --gray-600: #616161;
+            --gray-800: #212121;
+            --red: #e53935;
+            --red-dark: #c62828;
+            --red-light: #ff6659;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Instrument Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: var(--white);
+            color: var(--black);
+            line-height: 1.6;
+            -webkit-font-smoothing: antialiased;
+            overflow-x: hidden;
+        }
+
+        .mono {
+            font-family: 'DM Mono', monospace;
+        }
+
+        /* Navigation */
+        nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 1000;
+            padding: 1.25rem 3rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: rgba(255,255,255,0.95);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border-bottom: 1px solid var(--gray-100);
+        }
+
+        .nav-brand {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .nav-logos {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+        }
+
+        .nav-logo {
+            font-weight: 600;
+            font-size: 1rem;
+            letter-spacing: -0.01em;
+        }
+
+        .nav-logo.biohackr {
+            color: var(--red);
+        }
+
+        .nav-divider {
+            width: 1px;
+            height: 18px;
+            background: var(--gray-200);
+        }
+
+        .nav-tag {
+            font-family: 'DM Mono', monospace;
+            font-size: 0.65rem;
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+            color: var(--gray-600);
+            padding: 0.3rem 0.6rem;
+            background: var(--gray-50);
+            border-radius: 4px;
+        }
+
+        .nav-cta {
+            padding: 0.65rem 1.5rem;
+            background: var(--black);
+            color: white;
+            text-decoration: none;
+            font-size: 0.85rem;
+            font-weight: 500;
+            border-radius: 6px;
+            transition: all 0.2s ease;
+        }
+
+        .nav-cta:hover {
+            background: var(--gray-800);
+            transform: translateY(-1px);
+        }
+
+        /* Hero Section */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            padding: 8rem 2rem 6rem;
+            position: relative;
+            background: var(--white);
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-image: 
+                radial-gradient(circle at 30% 20%, rgba(229,57,53,0.03) 0%, transparent 50%),
+                radial-gradient(circle at 70% 80%, rgba(0,0,0,0.02) 0%, transparent 50%);
+            pointer-events: none;
+        }
+
+        .hero-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.6rem;
+            padding: 0.5rem 1rem;
+            background: var(--black);
+            border-radius: 100px;
+            font-family: 'DM Mono', monospace;
+            font-size: 0.7rem;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            color: white;
+            margin-bottom: 2.5rem;
+            animation: fadeInUp 0.8s ease forwards;
+        }
+
+        .hero-badge .dot {
+            width: 6px;
+            height: 6px;
+            background: var(--red);
+            border-radius: 50%;
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.5; }
+        }
+
+        .hero h1 {
+            font-size: clamp(2.75rem, 7vw, 5rem);
+            font-weight: 700;
+            line-height: 1.05;
+            letter-spacing: -0.035em;
+            margin-bottom: 1.75rem;
+            animation: fadeInUp 0.8s ease 0.1s forwards;
+            opacity: 0;
+        }
+
+        .hero h1 span {
+            color: var(--red);
+        }
+
+        .hero-subtitle {
+            font-size: 1.15rem;
+            color: var(--gray-600);
+            max-width: 540px;
+            margin-bottom: 2.5rem;
+            animation: fadeInUp 0.8s ease 0.2s forwards;
+            opacity: 0;
+            line-height: 1.7;
+            font-weight: 400;
+        }
+
+        .hero-cta {
+            display: flex;
+            gap: 1rem;
+            animation: fadeInUp 0.8s ease 0.3s forwards;
+            opacity: 0;
+        }
+
+        .btn-primary {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 1rem 2rem;
+            background: var(--red);
+            color: white;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 0.9rem;
+            border-radius: 6px;
+            transition: all 0.3s ease;
+        }
+
+        .btn-primary:hover {
+            background: var(--red-dark);
+            transform: translateY(-2px);
+            box-shadow: 0 8px 24px rgba(229,57,53,0.25);
+        }
+
+        .btn-secondary {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 1rem 2rem;
+            background: white;
+            color: var(--black);
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 0.9rem;
+            border-radius: 6px;
+            border: 1px solid var(--gray-200);
+            transition: all 0.3s ease;
+        }
+
+        .btn-secondary:hover {
+            background: var(--gray-50);
+            border-color: var(--gray-300);
+        }
+
+        /* About Section */
+        .about {
+            padding: 8rem 3rem;
+            background: var(--off-white);
+        }
+
+        .section-label {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-family: 'DM Mono', monospace;
+            font-size: 0.7rem;
+            text-transform: uppercase;
+            letter-spacing: 0.12em;
+            color: var(--red);
+            font-weight: 500;
+            margin-bottom: 1rem;
+        }
+
+        .section-label::before {
+            content: '';
+            width: 8px;
+            height: 2px;
+            background: var(--red);
+        }
+
+        .about-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 6rem;
+            max-width: 1200px;
+            margin: 0 auto;
+            align-items: center;
+        }
+
+        .about-content h2 {
+            font-size: 2.5rem;
+            font-weight: 700;
+            letter-spacing: -0.025em;
+            line-height: 1.15;
+            margin-bottom: 1.5rem;
+        }
+
+        .about-content p {
+            color: var(--gray-600);
+            font-size: 1.05rem;
+            line-height: 1.8;
+            margin-bottom: 1.25rem;
+        }
+
+        .about-visual {
+            position: relative;
+        }
+
+        .visual-card {
+            background: var(--white);
+            border: 1px solid var(--gray-100);
+            border-radius: 12px;
+            padding: 2.5rem;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .stat-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1.5rem;
+        }
+
+        .stat {
+            text-align: center;
+            padding: 1.5rem;
+            background: var(--off-white);
+            border-radius: 8px;
+        }
+
+        .stat-number {
+            font-size: 2.25rem;
+            font-weight: 700;
+            color: var(--black);
+            line-height: 1;
+            margin-bottom: 0.5rem;
+            letter-spacing: -0.02em;
+        }
+
+        .stat-number.red {
+            color: var(--red);
+        }
+
+        .stat-label {
+            font-size: 0.8rem;
+            color: var(--gray-600);
+            font-weight: 500;
+        }
+
+        /* What is TMS Section */
+        .tms-section {
+            padding: 8rem 3rem;
+            background: var(--white);
+        }
+
+        .tms-container {
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        .tms-header {
+            text-align: center;
+            margin-bottom: 4rem;
+        }
+
+        .tms-header h2 {
+            font-size: 2.5rem;
+            font-weight: 700;
+            letter-spacing: -0.025em;
+            margin-bottom: 1rem;
+        }
+
+        .tms-header p {
+            color: var(--gray-600);
+            font-size: 1.1rem;
+            max-width: 600px;
+            margin: 0 auto;
+            line-height: 1.7;
+        }
+
+        .tms-features {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1.5rem;
+        }
+
+        .tms-feature {
+            background: var(--off-white);
+            padding: 2rem;
+            border-radius: 10px;
+            border: 1px solid transparent;
+            transition: all 0.3s ease;
+        }
+
+        .tms-feature:hover {
+            border-color: var(--gray-200);
+            transform: translateY(-4px);
+            box-shadow: 0 12px 32px rgba(0,0,0,0.06);
+        }
+
+        .tms-feature-icon {
+            width: 44px;
+            height: 44px;
+            background: var(--black);
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 1.25rem;
+        }
+
+        .tms-feature-icon svg {
+            width: 22px;
+            height: 22px;
+            stroke: white;
+        }
+
+        .tms-feature h3 {
+            font-size: 1.1rem;
+            font-weight: 600;
+            margin-bottom: 0.75rem;
+            letter-spacing: -0.01em;
+        }
+
+        .tms-feature p {
+            color: var(--gray-600);
+            font-size: 0.95rem;
+            line-height: 1.6;
+        }
+
+        /* Process Section */
+        .process {
+            padding: 8rem 3rem;
+            background: var(--off-white);
+        }
+
+        .process-container {
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        .process-header {
+            text-align: center;
+            margin-bottom: 4rem;
+        }
+
+        .process-header h2 {
+            font-size: 2.5rem;
+            font-weight: 700;
+            letter-spacing: -0.025em;
+            margin-bottom: 1rem;
+        }
+
+        .process-steps {
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+        }
+
+        .step {
+            display: grid;
+            grid-template-columns: 56px 1fr;
+            gap: 2rem;
+            align-items: start;
+            padding: 2rem;
+            background: var(--white);
+            border-radius: 10px;
+            border: 1px solid var(--gray-100);
+            transition: all 0.3s ease;
+        }
+
+        .step:hover {
+            border-color: var(--red);
+            box-shadow: 0 4px 20px rgba(229,57,53,0.08);
+        }
+
+        .step-number {
+            font-family: 'DM Mono', monospace;
+            font-size: 1.5rem;
+            font-weight: 500;
+            color: var(--red);
+            line-height: 1;
+        }
+
+        .step-content h3 {
+            font-size: 1.15rem;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+            letter-spacing: -0.01em;
+        }
+
+        .step-content p {
+            color: var(--gray-600);
+            font-size: 1rem;
+            line-height: 1.7;
+        }
+
+        /* Benefits Section */
+        .benefits {
+            padding: 8rem 3rem;
+            background: var(--black);
+            color: white;
+        }
+
+        .benefits-container {
+            max-width: 1100px;
+            margin: 0 auto;
+        }
+
+        .benefits-header {
+            text-align: center;
+            margin-bottom: 4rem;
+        }
+
+        .benefits-header .section-label {
+            color: var(--red-light);
+        }
+
+        .benefits-header .section-label::before {
+            background: var(--red-light);
+        }
+
+        .benefits-header h2 {
+            font-size: 2.5rem;
+            font-weight: 700;
+            letter-spacing: -0.025em;
+        }
+
+        .benefits-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 1.25rem;
+        }
+
+        .benefit-card {
+            padding: 2rem;
+            background: rgba(255,255,255,0.03);
+            border: 1px solid rgba(255,255,255,0.08);
+            border-radius: 10px;
+            transition: all 0.3s ease;
+        }
+
+        .benefit-card:hover {
+            background: rgba(255,255,255,0.05);
+            border-color: rgba(229,57,53,0.4);
+        }
+
+        .benefit-card h3 {
+            font-size: 1.1rem;
+            font-weight: 600;
+            margin-bottom: 0.75rem;
+            color: white;
+            letter-spacing: -0.01em;
+        }
+
+        .benefit-card p {
+            color: var(--gray-400);
+            font-size: 0.95rem;
+            line-height: 1.6;
+        }
+
+        /* Testimonial Carousel */
+        .testimonial-section {
+            padding: 6rem 3rem;
+            background: var(--white);
+        }
+
+        .testimonial-carousel {
+            max-width: 700px;
+            margin: 0 auto;
+            text-align: center;
+            position: relative;
+        }
+
+        .testimonial-track {
+            position: relative;
+            min-height: 200px;
+        }
+
+        .testimonial {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            opacity: 0;
+            transform: translateX(20px);
+            transition: all 0.5s ease;
+            pointer-events: none;
+        }
+
+        .testimonial.active {
+            position: relative;
+            opacity: 1;
+            transform: translateX(0);
+            pointer-events: auto;
+        }
+
+        .testimonial blockquote {
+            font-size: 1.35rem;
+            font-style: italic;
+            line-height: 1.7;
+            color: var(--gray-800);
+            margin-bottom: 1.5rem;
+            font-weight: 400;
+        }
+
+        .testimonial cite {
+            font-family: 'DM Mono', monospace;
+            font-size: 0.8rem;
+            color: var(--gray-600);
+            font-style: normal;
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+        }
+
+        .testimonial-dots {
+            display: flex;
+            justify-content: center;
+            gap: 0.5rem;
+            margin-top: 2rem;
+        }
+
+        .testimonial-dots .dot {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            border: none;
+            background: var(--gray-200);
+            cursor: pointer;
+            transition: all 0.3s ease;
+            padding: 0;
+        }
+
+        .testimonial-dots .dot:hover {
+            background: var(--gray-400);
+        }
+
+        .testimonial-dots .dot.active {
+            background: var(--red);
+            width: 24px;
+            border-radius: 4px;
+        }
+
+        /* CTA Section */
+        .cta-section {
+            padding: 8rem 3rem;
+            background: var(--red);
+            text-align: center;
+            color: white;
+        }
+
+        .cta-content {
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .cta-content h2 {
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            letter-spacing: -0.025em;
+        }
+
+        .cta-content p {
+            font-size: 1.1rem;
+            opacity: 0.9;
+            margin-bottom: 2rem;
+        }
+
+        .cta-buttons {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+        }
+
+        .cta-buttons .btn-primary {
+            background: white;
+            color: var(--red);
+        }
+
+        .cta-buttons .btn-primary:hover {
+            background: var(--off-white);
+            box-shadow: 0 8px 24px rgba(0,0,0,0.15);
+        }
+
+        .cta-buttons .btn-secondary {
+            background: transparent;
+            color: white;
+            border-color: rgba(255,255,255,0.4);
+        }
+
+        .cta-buttons .btn-secondary:hover {
+            background: rgba(255,255,255,0.1);
+            border-color: rgba(255,255,255,0.6);
+        }
+
+        /* Footer */
+        footer {
+            padding: 3rem;
+            background: var(--black);
+            border-top: 1px solid rgba(255,255,255,0.08);
+        }
+
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .footer-brand {
+            display: flex;
+            align-items: center;
+            gap: 2rem;
+        }
+
+        .footer-logo {
+            font-weight: 600;
+            font-size: 0.95rem;
+            color: white;
+            letter-spacing: -0.01em;
+        }
+
+        footer p {
+            color: var(--gray-400);
+            font-size: 0.85rem;
+        }
+
+        .footer-links {
+            display: flex;
+            gap: 2rem;
+        }
+
+        .footer-links a {
+            color: var(--gray-400);
+            text-decoration: none;
+            font-size: 0.85rem;
+            transition: color 0.3s ease;
+        }
+
+        .footer-links a:hover {
+            color: var(--red-light);
+        }
+
+        /* Animations */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Responsive */
+        @media (max-width: 1024px) {
+            nav {
+                padding: 1rem 2rem;
+            }
+
+            .about-grid {
+                grid-template-columns: 1fr;
+                gap: 3rem;
+            }
+
+            .tms-features {
+                grid-template-columns: 1fr;
+            }
+
+            .benefits-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .hero {
+                padding: 7rem 1.5rem 4rem;
+            }
+
+            .hero-cta {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .step {
+                grid-template-columns: 1fr;
+                gap: 1rem;
+            }
+
+            .stat-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .cta-buttons {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .footer-content {
+                flex-direction: column;
+                gap: 2rem;
+                text-align: center;
+            }
+
+            .footer-brand {
+                flex-direction: column;
+                gap: 1rem;
+            }
+
+            .nav-tag {
+                display: none;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav>
+        <div class="nav-brand">
+            <div class="nav-logos">
+                <span class="nav-logo">Pharia</span>
+                <div class="nav-divider"></div>
+                <span class="nav-logo biohackr">Biohackr Health</span>
+            </div>
+            <span class="nav-tag">Premium Partnership</span>
+        </div>
+        <a href="https://calendar.app.google/M9tQFtLDzESJ37gz7" class="nav-cta">Book a Brain Reset Day</a>
+    </nav>
+
+    <!-- Hero -->
+    <section class="hero">
+        <div class="hero-badge">
+            <span class="dot"></span>
+            <span>Now Available at Biohackr Health SF</span>
+        </div>
+        <h1>Brain Reset Day.<br><span>One Day. Real Results.</span></h1>
+        <p class="hero-subtitle">
+            A full-day intensive neuromodulation experience designed for Biohackr's most engaged clients. Accelerated TMS protocols adapted from 15+ years of clinical use.
+        </p>
+        <div class="hero-cta">
+            <a href="https://calendar.app.google/M9tQFtLDzESJ37gz7" class="btn-primary">
+                Reserve Your Day
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M5 12h14M12 5l7 7-7 7"/>
+                </svg>
+            </a>
+            <a href="#science" class="btn-secondary">
+                The Science
+            </a>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section class="about" id="about">
+        <div class="about-grid">
+            <div class="about-content">
+                <div class="section-label">The Partnership</div>
+                <h2>The next frontier in optimizing your mental performance</h2>
+                <p>
+                    You optimize your hormones, your nutrition, your recovery. Now it's time to optimize the command center.
+                </p>
+                <p>
+                    Biohackr Health has partnered with Pharia to offer Brain Reset Days — a one-day intensive neuromodulation experience using accelerated TMS protocols adapted from 15+ years of clinical research.
+                </p>
+                <p>
+                    This isn't a series of weekly sessions. It's a single, high-impact day designed to deliver measurable cognitive shifts — delivered at Biohackr and integrated with your broader optimization stack.
+                </p>
+            </div>
+            <div class="about-visual">
+                <div class="visual-card">
+                    <div class="stat-grid">
+                        <div class="stat">
+                            <div class="stat-number red">75%</div>
+                            <div class="stat-label">Success Rate</div>
+                        </div>
+                        <div class="stat">
+                            <div class="stat-number">24–72h</div>
+                            <div class="stat-label">Time to First Shift</div>
+                        </div>
+                        <div class="stat">
+                            <div class="stat-number">FDA</div>
+                            <div class="stat-label">Cleared Technology</div>
+                        </div>
+                        <div class="stat">
+                            <div class="stat-number">15+</div>
+                            <div class="stat-label">Years Clinical Use</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Benefits Section -->
+    <section class="benefits">
+        <div class="benefits-container">
+            <div class="benefits-header">
+                <div class="section-label">Results</div>
+                <h2>What Clients Experience</h2>
+            </div>
+            <div class="benefits-grid">
+                <div class="benefit-card">
+                    <h3>Enhanced Focus + Clarity</h3>
+                    <p>Cut through mental fog and maintain sustained attention on demanding tasks. Make decisions with greater confidence and speed.</p>
+                </div>
+                <div class="benefit-card">
+                    <h3>Reduced Mental Chatter</h3>
+                    <p>Quiet the inner critic and rumination loops that drain energy and distract from what matters most.</p>
+                </div>
+                <div class="benefit-card">
+                    <h3>Improved Stress Resilience</h3>
+                    <p>Build capacity for high-pressure situations. Stay calm and perform when the stakes are highest.</p>
+                </div>
+                <div class="benefit-card">
+                    <h3>Cognitive Stamina</h3>
+                    <p>By enhancing ease and control in the mind, peak performance becomes your default state — not something you have to force.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- What is TMS Section -->
+    <section class="tms-section" id="science">
+        <div class="tms-container">
+            <div class="tms-header">
+                <div class="section-label">The Science</div>
+                <h2>Accelerated TMS Protocols</h2>
+                <p>
+                    Transcranial Magnetic Stimulation (TMS) uses precisely targeted magnetic pulses to optimize brain activity in neural networks tied to focus, presence, and emotional reactivity. Our accelerated protocols deliver rapid shifts — one day, with most people feeling changes within 24 hours. Adapted from 15 years of clinical use for higher-functioning individuals who want more control over how they think, feel, and perform.
+                </p>
+            </div>
+            <div class="tms-features">
+                <div class="tms-feature">
+                    <div class="tms-feature-icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/>
+                        </svg>
+                    </div>
+                    <h3>One-Day Intensive</h3>
+                    <p>Skip the weekly appointments. Our accelerated protocol delivers a full treatment course in a single day at Biohackr.</p>
+                </div>
+                <div class="tms-feature">
+                    <div class="tms-feature-icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M22 12h-4l-3 9L9 3l-3 9H2"/>
+                        </svg>
+                    </div>
+                    <h3>Non-Invasive</h3>
+                    <p>No surgery, no downtime. TMS works through magnetic fields that pass safely through the skull to target specific brain regions.</p>
+                </div>
+                <div class="tms-feature">
+                    <div class="tms-feature-icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <circle cx="12" cy="12" r="10"/>
+                            <path d="M8 12l2 2 4-4"/>
+                        </svg>
+                    </div>
+                    <h3>World-Class Care</h3>
+                    <p>Overseen by world-class neuropsychiatrists with a decade of experience in TMS. Built on 15+ years of clinical research and real-world application.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Process Section -->
+    <section class="process">
+        <div class="process-container">
+            <div class="process-header">
+                <div class="section-label">Your Brain Reset Day</div>
+                <h2>How It Works</h2>
+            </div>
+            <div class="process-steps">
+                <div class="step">
+                    <div class="step-number">01</div>
+                    <div class="step-content">
+                        <h3>Physician Evaluation + Protocol Design</h3>
+                        <p>Start with a comprehensive consultation. We assess your cognitive goals — focus, resilience, mental clarity, stress response — and design a personalized TMS protocol.</p>
+                    </div>
+                </div>
+                <div class="step">
+                    <div class="step-number">02</div>
+                    <div class="step-content">
+                        <h3>Accelerated Treatment Day</h3>
+                        <p>Your Brain Reset Day at Biohackr SF. Multiple TMS sessions throughout the day, targeting the specific brain regions mapped in your protocol. Comfortable, focused, uninterrupted.</p>
+                    </div>
+                </div>
+                <div class="step">
+                    <div class="step-number">03</div>
+                    <div class="step-content">
+                        <h3>Integration with Your Stack</h3>
+                        <p>Combine your Brain Reset with Biohackr's broader recovery offerings — NAD+, peptides, IV therapy — for compounded benefits and faster integration.</p>
+                    </div>
+                </div>
+                <div class="step">
+                    <div class="step-number">04</div>
+                    <div class="step-content">
+                        <h3>Concierge Follow-Up</h3>
+                        <p>Post-treatment support and outcome tracking. Optional monthly booster sessions to maintain and extend your results.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonial Carousel -->
+    <section class="testimonial-section">
+        <div class="testimonial-carousel">
+            <div class="testimonial-track">
+                <div class="testimonial active">
+                    <blockquote>
+                        "It's almost like I've gotten a remote control to turn down the noise when I need to... it's given me more control over how I choose to engage with those patterns."
+                    </blockquote>
+                    <cite>Pharia Client — Founder</cite>
+                </div>
+                <div class="testimonial">
+                    <blockquote>
+                        "I'm making decisions at work with more clarity. I'm able to wake up and not have a million thoughts rush in — I can just get started with my day, enjoy it, and get things done."
+                    </blockquote>
+                    <cite>Pharia Client — Executive</cite>
+                </div>
+                <div class="testimonial">
+                    <blockquote>
+                        "I can't tell you how much I have enjoyed my experience. I'm so much more focused, ruminating a lot less. My 8sleep loves it. My sleep scores went from 80s to 90s."
+                    </blockquote>
+                    <cite>Pharia Client — Executive Assistant</cite>
+                </div>
+            </div>
+            <div class="testimonial-dots">
+                <button class="dot active" data-index="0"></button>
+                <button class="dot" data-index="1"></button>
+                <button class="dot" data-index="2"></button>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="cta-section" id="get-started">
+        <div class="cta-content">
+            <h2>Ready for your Brain Reset?</h2>
+            <p>Limited availability at Biohackr Health SF. Reserve your Brain Reset Day.</p>
+            <div class="cta-buttons">
+                <a href="https://calendar.app.google/M9tQFtLDzESJ37gz7" class="btn-primary">
+                    Reserve Your Day
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M5 12h14M12 5l7 7-7 7"/>
+                    </svg>
+                </a>
+                <a href="#science" class="btn-secondary">
+                    The Science
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-content">
+            <div class="footer-brand">
+                <div class="footer-logo">Pharia × Biohackr Health</div>
+                <p>Brain optimization for high performers</p>
+            </div>
+            <div class="footer-links">
+                <a href="https://www.phariahealth.com">Pharia Health</a>
+                <a href="https://www.biohackr.health">Biohackr Health</a>
+                <a href="https://www.phariahealth.com/the-science">The Science</a>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Testimonial Carousel
+        const testimonials = document.querySelectorAll('.testimonial');
+        const dots = document.querySelectorAll('.testimonial-dots .dot');
+        let currentIndex = 0;
+        let autoplayInterval;
+
+        function showTestimonial(index) {
+            testimonials.forEach((t, i) => {
+                t.classList.toggle('active', i === index);
+            });
+            dots.forEach((d, i) => {
+                d.classList.toggle('active', i === index);
+            });
+            currentIndex = index;
+        }
+
+        function nextTestimonial() {
+            const next = (currentIndex + 1) % testimonials.length;
+            showTestimonial(next);
+        }
+
+        // Click handlers for dots
+        dots.forEach((dot, index) => {
+            dot.addEventListener('click', () => {
+                showTestimonial(index);
+                resetAutoplay();
+            });
+        });
+
+        // Autoplay
+        function startAutoplay() {
+            autoplayInterval = setInterval(nextTestimonial, 5000);
+        }
+
+        function resetAutoplay() {
+            clearInterval(autoplayInterval);
+            startAutoplay();
+        }
+
+        startAutoplay();
+
+        // Smooth reveal animations
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.step, .benefit-card, .tms-feature, .stat').forEach(el => {
+            el.style.opacity = '0';
+            el.style.transform = 'translateY(20px)';
+            el.style.transition = 'all 0.6s ease';
+            observer.observe(el);
+        });
+    </script>
+</body>
+</html>
